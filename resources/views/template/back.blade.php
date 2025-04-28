@@ -39,9 +39,6 @@
     <link rel="stylesheet" href="{{ asset('sneat-1.0.0') }}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
     <link rel="stylesheet" href="{{ asset('sneat-1.0.0') }}/assets/vendor/libs/apex-charts/apex-charts.css" />
-
-    <!-- Page CSS -->
-
     <!-- Helpers -->
     <script src="{{ asset('sneat-1.0.0') }}/assets/vendor/js/helpers.js"></script>
 
