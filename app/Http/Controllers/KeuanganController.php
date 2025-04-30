@@ -19,9 +19,7 @@ class KeuanganController extends Controller
     {
         $user = auth()->user();
 
-        $keluargaUsers = User::where('keluarga_id', $user->keluarga_id)
-                            ->where('id', '!=', $user->id)
-                            ->get();
+        $keluargaUsers = User::where('keluarga_id', $user->keluarga_id)->where('id', '!=', $user->id)->get();
 
         // $keuangan = keuangan::paginate(5);
         $keuangan = \App\Models\keuangan::where('user_id', auth()->id())->paginate(5);

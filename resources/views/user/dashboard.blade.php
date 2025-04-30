@@ -28,10 +28,6 @@
 
                         <button class="btn rounded-pill btn-primary" data-bs-toggle="modal" data-bs-target="#backDropModal"><i class="bx bx-plus-circle me-1"></i> Tambah Data</button>
 
-                        {{-- <button class="btn rounded-pill btn-success"><i class="bx bx-import me-1"></i> Impor Excel</button>
-
-                        <button class="btn rounded-pill btn-info"><i class="bx bx-download me-1"></i> Download Template</button> --}}
-
                     </div>
 
                 </div>

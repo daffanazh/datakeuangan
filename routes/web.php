@@ -1,5 +1,7 @@
 <?php
 
+use App\Exports\UsersExport;
+use App\Exports\KeuanganExport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
@@ -37,5 +39,17 @@ use App\Http\Controllers\BendaharaController;
     Route::middleware(['auth','bendaharaMiddleware'])->group(function(){
 
         Route::get('bendahara/dashboard', [BendaharaController::class, 'index'])->name('bendahara.dashboard');
+
+        Route::resource('bendahara', BendaharaController::class);
+
+        Route::get('bendahara/register', [BendaharaController::class, 'register'])->name('bendahara.register');
+
+        Route::post('bendahara/registrasi', [BendaharaController::class, 'registrasi'])->name('bendahara.registrasi');
+
+        Route::get('/export-keuangan', function () {
+            return Excel::download(new KeuanganExport, 'keuangan.xlsx');
+        });
+
+        Route::post('/keuangan/import', [BendaharaController::class, 'import'])->name('keuangan.import');
 
     });
