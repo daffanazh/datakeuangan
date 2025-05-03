@@ -9,7 +9,13 @@ class Keluarga extends Model
 {
     /** @use HasFactory<\Database\Factories\KeluargaFactory> */
     use HasFactory;
-    
+
+    protected $fillable = [
+        'nama_keluarga',
+        'email_keluarga'
+    ];
+
+
     public function user(){
         return $this->hasMany(User::class);
     }

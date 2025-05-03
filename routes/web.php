@@ -5,6 +5,7 @@ use App\Exports\KeuanganExport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\KeluargaController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\BendaharaController;
 
@@ -51,5 +52,11 @@ use App\Http\Controllers\BendaharaController;
         });
 
         Route::post('/keuangan/import', [BendaharaController::class, 'import'])->name('keuangan.import');
+
+        Route::resource('keluarga', KeluargaController::class);
+
+        Route::get('users', [BendaharaController::class, 'index3'])->name('bendahara.index3');
+
+        Route::delete('users/{id}', [BendaharaController::class, 'destroyuser'])->name('bendahara.destroyuser');
 
     });

@@ -42,6 +42,32 @@ class BendaharaController extends Controller
         return view('bendahara.dashboard', compact('keuangan'));
     }
 
+    public function index2()
+    {
+        $user = User::with('keluarga')->get();
+
+        return view('keluarga.index2',compact('user'));
+
+    }
+
+    public function index3(Request $request)
+    {
+
+        $search = $request->query('search');
+        $user = User::query();
+
+        if (!empty($search)) {
+            $user->where(function($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        $user = $user->paginate(5)->withQueryString();
+
+        return view ('keluarga.index2',compact('user'));
+
+    }
+
     public function register()
     {
         $keluarga = Keluarga::all();
@@ -132,4 +158,16 @@ class BendaharaController extends Controller
     {
         //
     }
+
+    public function destroyuser($id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        Alert::success('Sukses!', 'Data Berhasil Dihapus!');
+
+        return redirect()->route('bendahara.index3');
+    }
+
 }

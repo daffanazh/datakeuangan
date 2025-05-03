@@ -86,6 +86,13 @@
 
                 <div class="mb-3">
 
+
+                        <div class="mb-4">
+
+                            <a class="text-danger" href="{{ route('bendahara.index') }}">< Kembali ke Beranda </a>
+
+                        </div>
+
                     @php
 
                         use App\Models\Keluarga;
@@ -109,11 +116,6 @@
                         @enderror
                     </div>
 
-
-                    @error('email')
-                      <small class="form-text text-danger">{{ $message }}</small>
-                    @enderror
-
                 </div>
 
                 {{-- USERTYPE DEFAULT : USER --}}
@@ -129,14 +131,14 @@
                       autofocus
                     />
 
-                    @error('email')
+                    @error('name')
                       <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
 
                 </div>
 
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
+                  <label for="email" class="form-label">Email User</label>
                   <input
                     type="text"
                     class="form-control"
@@ -166,11 +168,12 @@
                     />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
 
-                    @error('password')
-                        <small class="form-text text-danger">{{ $message }}</small>
-                    @enderror
-
                   </div>
+
+                  @error('password')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                  @enderror
+
                 </div>
 
                 <div class="mb-5 form-password-toggle">
@@ -188,20 +191,17 @@
                       />
                       <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
 
-                      @error('password')
-                          <small class="form-text text-danger">{{ $message }}</small>
-                      @enderror
-
                     </div>
+
+                    @error('password')
+                          <small class="form-text text-danger">{{ $message }}</small>
+                    @enderror
+
                 </div>
 
                 <div class="mb-3">
                   <button class="btn btn-primary d-grid w-100" type="submit">Daftar</button>
                 </div>
-
-                <center>
-                    <a href="{{ route('bendahara.dashboard') }}" class="text-danger">Kembali ke beranda</a>
-                </center>
 
             </form>
 

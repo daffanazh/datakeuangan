@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html
@@ -48,6 +49,9 @@
   </head>
 
   <body>
+
+    @include('sweetalert::alert')
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -122,15 +126,33 @@
           <div class="menu-inner-shadow"></div>
 
           <ul class="menu-inner py-1">
-            <!-- Dashboard -->
+
+            <!-- BERANDA -->
             <li class="menu-item active">
-              <a href="{{ route('keuangan.index') }}" class="menu-link">
+              <a href="{{ route('bendahara.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Beranda</div>
               </a>
             </li>
 
+            {{-- KELUARGA --}}
+            <li class="menu-item">
+                <a href="{{ route('keluarga.index') }}" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-group"></i>
+                  <div data-i18n="Analytics">Keluarga</div>
+                </a>
+            </li>
+
+            {{-- USERS --}}
+            <li class="menu-item">
+                <a href="{{ route('bendahara.index3') }}" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-group"></i>
+                  <div data-i18n="Analytics">User</div>
+                </a>
+            </li>
+
           </ul>
+
         </aside>
         <!-- / Menu -->
 
@@ -150,7 +172,7 @@
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
-                {{-- <form action="{{ route('dashboard') }}" method="GET" class="d-flex align-items-center">
+                <form action="{{ route('keluarga.index') }}" method="GET" class="d-flex align-items-center">
                     <div class="input-group">
                       <input
                         type="text"
@@ -161,7 +183,7 @@
                       />
 
                     </div>
-                </form> --}}
+                </form>
 
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
@@ -191,6 +213,18 @@
 
                     <li>
                       <div class="dropdown-divider"></div>
+                    </li>
+
+                    <li>
+
+                        <a class="dropdown-item" href="{{ route('bendahara.register') }}">
+
+                            <i class="bx bx-user me-2"></i>
+
+                            <span class="align-middle">Registrasi</span>
+
+                        </a>
+
                     </li>
 
                     <li>
@@ -228,9 +262,227 @@
 
               <div class="row">
                 <div class="col-lg-12 mb-4 order-0">
-                    @yield('konten')
+
+                    <div class="card">
+
+                        <div class="table-responsive text-nowrap">
+
+                            <table class="table">
+
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+
+                                    <h3 class="card-header"><b>Data Keluarga</b></h3>
+
+                                    <div class="d-flex justify-content-end gap-2 me-5">
+
+                                        <a href="{{ route('keluarga.index') }}"><i class="bx bx-refresh me-1"></i></a>
+
+                                        <button class="btn rounded-pill btn-primary" data-bs-toggle="modal" data-bs-target="#backDropModal"><i class="bx bx-plus-circle me-1"></i> Tambah Data</button>
+
+                                    </div>
+
+                                </div>
+
+                                <thead class="table-light">
+
+                                    <tr class="text-center">
+
+                                        <th>No.</th>
+
+                                        <th>Nama Keluarga</th>
+
+                                        <th>Email Keluarga</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody class="table-border-bottom-0">
+
+                                    @foreach($keluarga as $index => $item)
+
+                                    <tr class="text-center">
+
+                                        <td>{{ ($keluarga->currentPage() - 1) * $keluarga->perPage() + $index + 1 }}</td>
+
+                                        <td class="p-3">{{$item->nama_keluarga}}</td>
+
+                                        <td class="p-3">{{$item->email_keluarga}}</td>
+
+                                        <td class="p-3">
+
+                                            <button type="button" class="btn rounded-pill btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $item->id }}"><i class="bx bx-edit-alt me-1"></i>Edit</button></a>
+
+                                            <form action="{{ route('keluarga.destroy', $item->id) }}" method="POST" style="display: inline;" class="form-hapus">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn rounded-pill btn-danger" onclick="return confirm('Yakin mau hapus?')">
+                                                    <i class="bx bx-trash me-1"></i> Hapus
+                                                </button>
+                                            </form>
+
+                                        </td>
+
+
+                                    </tr>
+
+                                    @endforeach
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-3">
+                            {{ $keluarga->links() }}
+                        </div>
+
+                    </div>
+
+
                 </div>
               </div>
+
+              {{-- MODAL TAMBAH DATA--}}
+
+                <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
+
+                    <div class="modal-dialog">
+
+                        <form class="modal-content" action="{{ route('keluarga.store') }}" method="POST" enctype="multipart/form-data">
+
+                            @csrf
+
+                            <div class="modal-header">
+
+                                <h5 class="modal-title" id="backDropModalTitle">Tambah Data Keluarga</h5>
+
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                            </div>
+
+                            <div class="modal-body">
+
+                                <div class="row g-2 mt-2">
+
+                                    <div class="col mb-0">
+
+                                        <label for="nama_keluarga" class="form-label"><b>Nama Keluarga</b></label>
+
+                                        <input type="text" name="nama_keluarga" id="import" class="form-control" placeholder="Masukkan nama keluarga..."/>
+
+                                        @error('import')
+                                            <small class="form-text text-danger">{{ $message }}</small>
+                                        @enderror
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row g-2 mt-2">
+
+                                    <div class="col mb-0">
+
+                                        <label for="nama_keluarga" class="form-label"><b>Email Keluarga</b></label>
+
+                                        <input type="email" name="email_keluarga" id="import" class="form-control" placeholder="Masukkan email keluarga..."/>
+
+                                        @error('import')
+                                            <small class="form-text text-danger">{{ $message }}</small>
+                                        @enderror
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"> Close </button>
+
+                                <button type="submit" class="btn btn-primary">Tambah</button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+              {{-- MODAL EDIT DATA --}}
+
+              @foreach($keluarga as $item)
+
+              <div class="modal fade" id="editModal{{ $item->id }}" data-bs-backdrop="static" tabindex="-1">
+
+                <div class="modal-dialog">
+
+                    <form class="modal-content" action="{{ route('keluarga.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+
+                        @csrf
+
+                        @method('PUT')
+
+                        <div class="modal-header">
+
+                            <h5 class="modal-title" id="backDropModalTitle">Edit Data</h5>
+
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                        </div>
+
+                        <div class="modal-body">
+
+                            <div class="row g-2">
+
+                                <div class="col mb-0">
+
+                                    <label for="emailBackdrop" class="form-label"><b>Nama Orang Tua</b></label>
+
+                                    <input type="text" name="nama_keluarga" id="nama_keluarga" class="form-control" value="{{ $item->nama_keluarga }}"/>
+
+                                </div>
+
+                                <div class="col mb-0">
+
+                                    <label for="dobBackdrop" class="form-label"><b>Email Orang Tua</b></label>
+
+                                    <input type="text" name="email_keluarga" id="email_keluarga" class="form-control" value="{{ $item->email_keluarga }}"/>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"> Close </button>
+
+                            <button type="submit" class="btn btn-primary">Update</button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+              </div>
+
+              @endforeach
+
+              @if(session('open_edit_modal_id'))
+                  <script>
+                      document.addEventListener("DOMContentLoaded", function() {
+                          var editModalId = "{{ session('open_edit_modal_id') }}";
+                          var modal = new bootstrap.Modal(document.getElementById('editModal' + editModalId));
+                          modal.show();
+                      });
+                  </script>
+              @endif
 
             </div>
             <!-- / Content -->
@@ -268,3 +520,4 @@
 
   </body>
 </html>
+

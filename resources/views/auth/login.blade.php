@@ -109,12 +109,12 @@
                       aria-describedby="password"
                     />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-
-                    @error('password')
-                        <small class="form-text text-danger">{{ $message }}</small>
-                    @enderror
-
                   </div>
+
+                  @error('password')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                  @enderror
+                  
                 </div>
 
                 <div class="mb-3">
