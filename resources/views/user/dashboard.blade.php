@@ -199,7 +199,7 @@
 
                             <div class="d-flex flex-wrap mb-0">
                                 @php
-                                    $bulan = ['Januari', 'mebruari', 'maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+                                    $bulan = ['Januari', 'Februari', 'maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
                                 @endphp
                                 @foreach($bulan as $index => $bln)
                                     <div class="form-check me-3 mb-2">

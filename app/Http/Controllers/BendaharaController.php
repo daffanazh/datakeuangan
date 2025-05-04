@@ -10,12 +10,14 @@ use App\Imports\KeuanganImport;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class BendaharaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     public function index(Request $request)
     {
         $search = $request->query('search');
@@ -39,7 +41,54 @@ class BendaharaController extends Controller
 
         $keuangan = $keuangan->paginate(10)->withQueryString();
 
-        return view('bendahara.dashboard', compact('keuangan'));
+        $bulanList = [
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+
+        $sudahPerBulan = [];
+        $belumPerBulan = [];
+        $userPerBulan = [];
+
+        foreach ($bulanList as $bulan) {
+
+            $userSudah = keuangan::where('bulan', 'LIKE', '%' . $bulan . '%')
+                ->distinct('user_id')
+                ->pluck('user_id');
+
+
+            $nonBendahara = User::where('usertype', '!=', 'bendahara')->pluck('id');
+
+
+            $namaUserSudah = User::whereIn('id', $userSudah)
+                ->whereIn('id', $nonBendahara)
+                ->pluck('name')
+                ->toArray();
+
+            
+            $namaUserBelum = User::whereIn('id', $nonBendahara)
+                ->whereNotIn('id', $userSudah)
+                ->pluck('name')
+                ->toArray();
+
+            $sudahPerBulan[] = count($namaUserSudah);
+            $belumPerBulan[] = count($namaUserBelum);
+
+            $userPerBulan[] = [
+                'bulan' => $bulan,
+                'sudah' => $namaUserSudah,
+                'belum' => $namaUserBelum,
+            ];
+        }
+
+
+        return view('bendahara.dashboard', compact(
+            'sudahPerBulan',
+            'belumPerBulan',
+            'userPerBulan',
+            'keuangan'
+        ));
+
     }
 
     public function index2()

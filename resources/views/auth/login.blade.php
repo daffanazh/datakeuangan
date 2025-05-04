@@ -27,6 +27,19 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="theme-color" content="#007bff">
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+        .then(function(reg) {
+            console.log('Service Worker Registered!', reg);
+        }).catch(function(err) {
+            console.log('Service Worker registration failed: ', err);
+        });
+    }
+    </script>
+
     <title>Data Keuangan Keluarga</title>
 
     <meta name="description" content="" />
@@ -114,7 +127,7 @@
                   @error('password')
                         <small class="form-text text-danger">{{ $message }}</small>
                   @enderror
-                  
+
                 </div>
 
                 <div class="mb-3">
