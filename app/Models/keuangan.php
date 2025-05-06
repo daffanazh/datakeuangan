@@ -18,12 +18,11 @@ class keuangan extends Model
         'bulan',
         'foto_bukti',
         'waktu_upload',
-        'penerima',
-        'deskripsi'
+        'penerima'
     ];
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }
-    
+
 }

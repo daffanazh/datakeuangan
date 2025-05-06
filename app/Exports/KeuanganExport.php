@@ -26,8 +26,7 @@ class KeuanganExport implements FromCollection, WithMapping, WithHeadings, WithS
             $keuangan->bulan,
             $keuangan->foto_bukti,
             $keuangan->waktu_upload,
-            $keuangan->penerima,
-            $keuangan->deskripsi,
+            $keuangan->penerima
         ];
     }
 
@@ -46,14 +45,13 @@ class KeuanganExport implements FromCollection, WithMapping, WithHeadings, WithS
             'Bulan',
             'Foto Bukti',
             'Waktu Upload',
-            'Penerima',
-            'Deskripsi',
+            'Penerima'
         ];
     }
 
     public function styles(Worksheet $sheet)
     {
-        // Mengatur seluruh kolom A sampai I dan baris 1 sampai jumlah data + 1 (karena ada heading)
+
         $lastRow = keuangan::count() + 1;
 
         $sheet->getStyle("A1:I{$lastRow}")->applyFromArray([
@@ -66,7 +64,6 @@ class KeuanganExport implements FromCollection, WithMapping, WithHeadings, WithS
             ]
         ]);
 
-        // Bold untuk header saja
         $sheet->getStyle("A1:I1")->getFont()->setBold(true);
 
         return [];
@@ -82,8 +79,7 @@ class KeuanganExport implements FromCollection, WithMapping, WithHeadings, WithS
             'E' => 30,
             'F' => 40,
             'G' => 20,
-            'H' => 20,
-            'I' => 30,
+            'H' => 20
         ];
     }
 }

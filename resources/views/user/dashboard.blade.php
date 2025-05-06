@@ -49,8 +49,6 @@
 
                         <th>Penerima</th>
 
-                        <th>Deskripsi</th>
-
                         <th>Aksi</th>
 
                     </tr>
@@ -80,8 +78,6 @@
                         <td class="p-3">{{$item->waktu_upload}}</td>
 
                         <td class="p-3">{{$item->penerima}}</td>
-
-                        <td class="p-3">{{$item->deskripsi}}</td>
 
                         <td class="p-3">
 
@@ -267,18 +263,6 @@
 
                         </div>
 
-                        <div class="col-6 mb-0">
-
-                            <label for="dobBackdrop" class="form-label"><b>Deskripsi</b></label>
-
-                            <input type="text" value="{{ old('deskripsi') }}" name="deskripsi" id="deskripsi" class="form-control" placeholder="Masukkan deskripsi..."/>
-
-                            @error('deskripsi')
-                                <small class="form-text text-danger">{{ $message }}</small>
-                            @enderror
-
-                        </div>
-
                     </div>
 
                 </div>
@@ -448,18 +432,6 @@
                             <input type="text" value="{{ old('penerima', $item->penerima) }}" name="penerima" id="penerima" class="form-control" placeholder="Masukkan nama penerima..."/>
 
                             @error('penerima')
-                                <small class="form-text text-danger">{{ $message }}</small>
-                            @enderror
-
-                        </div>
-
-                        <div class="col-6 mb-0">
-
-                            <label for="dobBackdrop" class="form-label"><b>Deskripsi</b></label>
-
-                            <input type="text" value="{{ old('deskripsi', $item->deskripsi) }}" name="deskripsi" id="deskripsi" class="form-control" placeholder="Masukkan deskripsi..."/>
-
-                            @error('deskripsi')
                                 <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
 

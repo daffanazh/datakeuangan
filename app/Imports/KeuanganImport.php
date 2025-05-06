@@ -24,8 +24,7 @@ class KeuanganImport implements ToModel, WithHeadingRow
             'bulan'           => $row['bulan'],
             'foto_bukti'      => $row['foto_bukti'],
             'waktu_upload'    => Carbon::parse($row['waktu_upload'])->format('H:i:s'),
-            'penerima'        => $row['penerima'],
-            'deskripsi'       => $row['deskripsi'],
+            'penerima'        => $row['penerima']
         ]);
     }
 }

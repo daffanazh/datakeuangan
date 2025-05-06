@@ -256,8 +256,8 @@
 
           <!-- Content wrapper -->
           <div class="content-wrapper">
-            <!-- Content -->
 
+            <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
 
               <div class="row">
@@ -267,7 +267,7 @@
                         <div class="card">
                           <div class="row row-bordered g-0">
                             <div class="col-md-12">
-                              <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
+                              <h5 class="card-header m-0 me-2 pb-3">Dashboard Keuangan</h5>
                               <div id="totalRevenueChart" class="px-2"></div>
                             </div>
                           </div>
@@ -290,7 +290,7 @@
 
                                         <button class="btn rounded-pill btn-success" data-bs-toggle="modal" data-bs-target="#backDropModal"><i class="bx bx-import me-1"></i> Impor Excel</button>
 
-                                        <a href="{{ url('/export-keuangan') }}"><button class="btn rounded-pill btn-info"><i class="bx bx-export me-1"></i> Expor Excel</button></a>
+                                        <a href="{{ url('/export-keuangan') }}"><button class="btn rounded-pill btn-info"><i class="bx bx-export me-1"></i> Ekspor Excel</button></a>
 
                                     </div>
 
@@ -299,6 +299,8 @@
                                 <thead class="table-light">
 
                                     <tr class="text-center">
+
+                                        <th>No</th>
 
                                         <th>Nama Keluarga</th>
 
@@ -316,8 +318,6 @@
 
                                         <th>Penerima</th>
 
-                                        <th>Deskripsi</th>
-
                                     </tr>
 
                                 </thead>
@@ -327,6 +327,8 @@
                                     @foreach($keuangan as $index => $item)
 
                                     <tr class="text-center">
+
+                                        <td>{{ ($keuangan->currentPage() - 1) * $keuangan->perPage() + $index + 1 }}</td>
 
                                         <td class="p-3">{{$item->user->keluarga->nama_keluarga}}</td>
 

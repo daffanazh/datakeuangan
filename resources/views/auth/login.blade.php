@@ -27,17 +27,22 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
+    {{-- PWA --}}
     <link rel="manifest" href="{{ asset('manifest.json') }}">
+
     <meta name="theme-color" content="#007bff">
+
     <script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js')
-        .then(function(reg) {
-            console.log('Service Worker Registered!', reg);
-        }).catch(function(err) {
-            console.log('Service Worker registration failed: ', err);
-        });
-    }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+            .then(function(reg) {
+                console.log('Service Worker Registered!', reg);
+            }).catch(function(err) {
+                console.log('Service Worker registration failed: ', err);
+            });
+        }
+
     </script>
 
     <title>Data Keuangan Keluarga</title>
@@ -118,7 +123,7 @@
                       id="password"
                       class="form-control"
                       name="password"
-                      placeholder="masukkan password"
+                      placeholder="masukkan password..."
                       aria-describedby="password"
                     />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>

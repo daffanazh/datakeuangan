@@ -48,7 +48,6 @@ class KeuanganController extends Controller
             'foto_bukti'      => 'required|image|mimes:jpg,png,jpeg|max:2048',
             'waktu_upload'    => 'required',
             'penerima'        => 'required|string|max:255',
-            'deskripsi'       => 'required|string'
         ]);
 
         $nm = $request->file('foto_bukti');
@@ -63,8 +62,7 @@ class KeuanganController extends Controller
             'bulan'            => $bulan,
             'foto_bukti'       => $namaFile,
             'waktu_upload'     => $request->waktu_upload,
-            'penerima'         => $request->penerima,
-            'deskripsi'        => $request->deskripsi
+            'penerima'         => $request->penerima
         ]);
 
         Alert::success('Berhasil', 'Data berhasil ditambahkan!');
@@ -101,8 +99,7 @@ class KeuanganController extends Controller
             'bulan'           => 'required|array',
             'foto_bukti'      => 'image|mimes:jpg,png,jpeg|max:2048',
             'waktu_upload'    => 'required',
-            'penerima'        => 'required|string|max:255',
-            'deskripsi'       => 'required|string'
+            'penerima'        => 'required|string|max:255'
         ]);
 
         $keuangan = keuangan::findOrFail($id);
@@ -123,8 +120,7 @@ class KeuanganController extends Controller
             'bulan'            => $bulan,
             'foto_bukti'       => $namaFile,
             'waktu_upload'     => $request->waktu_upload,
-            'penerima'         => $request->penerima,
-            'deskripsi'        => $request->deskripsi
+            'penerima'         => $request->penerima
         ]);
 
         Alert::success('Berhasil', 'Data berhasil diupdate!');

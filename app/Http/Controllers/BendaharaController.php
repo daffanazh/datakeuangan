@@ -28,7 +28,6 @@ class BendaharaController extends Controller
                 $query->where('jumlah_transfer', 'like', "%{$search}%")
                     ->orWhere('bulan', 'like', "%{$search}%")
                     ->orWhere('penerima', 'like', "%{$search}%")
-                    ->orWhere('deskripsi', 'like', "%{$search}%")
                     ->orWhereHas('user', function($q) use ($search) {
                         $q->where('name', 'like', "%{$search}%")
                             ->orWhereHas('keluarga', function($qq) use ($search) {
@@ -65,7 +64,7 @@ class BendaharaController extends Controller
                 ->pluck('name')
                 ->toArray();
 
-            
+
             $namaUserBelum = User::whereIn('id', $nonBendahara)
                 ->whereNotIn('id', $userSudah)
                 ->pluck('name')
