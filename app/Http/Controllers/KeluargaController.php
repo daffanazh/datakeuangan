@@ -32,7 +32,7 @@ class KeluargaController extends Controller
     public function index2(Request $request)
     {
 
-        $user = User::all();
+        $user = User::where('usertype', '!=', 'bendahara')->paginate(10);
         return view ('keluarga.index2', compact('user'));
 
     }

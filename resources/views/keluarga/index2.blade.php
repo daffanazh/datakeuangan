@@ -297,11 +297,9 @@
 
                                 <tbody class="table-border-bottom-0">
 
-                                    @php
-                                        $no = 1;
-                                    @endphp
-
                                     @foreach($user as $index => $item)
+
+                                    @if($item->usertype != 'bendahara')
 
                                     <tr class="text-center">
 
@@ -323,8 +321,9 @@
 
                                         </td>
 
-
                                     </tr>
+
+                                    @endif
 
                                     @endforeach
 
