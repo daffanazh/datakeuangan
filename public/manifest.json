@@ -2,7 +2,6 @@
     "name": "Data Keuangan",
     "short_name": "App",
     "start_url": "/",
-    "scope": "/",
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#ffffff",
