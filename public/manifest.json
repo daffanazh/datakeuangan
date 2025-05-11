@@ -1,7 +1,7 @@
 {
     "name": "Data Keuangan",
     "short_name": "App",
-    "start_url": "/",
+    "start_url": "https://datakeuangan.rf.gd/",
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#ffffff",
